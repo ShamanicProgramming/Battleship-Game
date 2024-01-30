@@ -4,86 +4,110 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BattleshipGame"
+        xmlns:viewModels="clr-namespace:BattleshipGame.ViewModels"
         mc:Ignorable="d"
-        Title="Battleship" Height="830" Width="1200">
+        Title="Battleship" Height="auto" Width="auto" SizeToContent="WidthAndHeight">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate x:Key="DataTemplate_Level2">
+            <Button Content="{Binding}" Height="50" Width="50"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplate_Level1">
+            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </DataTemplate>
+
+    </Window.Resources>
+
     <StackPanel
         Orientation="Vertical"
         Height="800"
-        Width="1200">
+        Width="1250">
         <DockPanel
-            Width="1150">
-            <StackPanel HorizontalAlignment="Left" Margin="10, 10, 10, 10">
+            Margin="10, 10, 10, 10"
+            Width="1200">
+            <StackPanel HorizontalAlignment="Left">
                 <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">Player</TextBlock>
-                <Grid x:Name="PlayerGrid" Height="550" Width="550" ShowGridLines="True">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content=" "/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="1"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="2"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="3"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="4"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="5"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="6"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="7"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="8"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="9"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="10"/>
+                </StackPanel>
+                <DockPanel
+                    Width="550">
+                    <StackPanel>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="A"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="B"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="C"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="D"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="E"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="F"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="G"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="H"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="I"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="J"/>
+                    </StackPanel>
+                    <ItemsControl x:Name="PlayerGrid" ItemTemplate="{DynamicResource DataTemplate_Level1}" Height="500" Width="500" ItemsSource="{Binding AiGrid}"/>
+                </DockPanel>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Right" Margin="10, 10, 10, 10">
+            <StackPanel HorizontalAlignment="Right">
                 <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">Ai</TextBlock>
-                <Grid Name ="AiGrid" VerticalAlignment="Bottom" Height="550" Width="550" ShowGridLines="True">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content=" "/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="1"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="2"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="3"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="4"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="5"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="6"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="7"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="8"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="9"/>
+                    <Label Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="10"/>
+                </StackPanel>
+                <DockPanel
+                    Width="550">
+                    <StackPanel>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="A"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="B"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="C"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="D"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="E"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="F"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="G"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="H"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="I"/>
+                        <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="J"/>
+                    </StackPanel>
+                    <ItemsControl x:Name="AiGrid" ItemTemplate="{DynamicResource DataTemplate_Level1}" Height="500" Width="500" ItemsSource="{Binding PlayerGrid}"/>
+                </DockPanel>
             </StackPanel>
         </DockPanel>
         <TextBox
             IsReadOnly="True"
             Margin="10, 5"
-            Height="150"
+            Height="175"
             ></TextBox>
         <Button
             Margin="10, 5"
             Width="100"
-            Click="NewGame">New Game</Button>
+            Command="{Binding NewGameCommand}">New Game</Button>
     </StackPanel>
 </Window>
