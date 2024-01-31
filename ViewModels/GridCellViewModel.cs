@@ -1,5 +1,4 @@
 ﻿using BattleshipGame.Models;
-using System.Windows;
 using System.Windows.Input;
 
 namespace BattleshipGame.ViewModels
@@ -7,16 +6,18 @@ namespace BattleshipGame.ViewModels
     class GridCellViewModel : ViewModelBase
     {
         private OceanGrid _oceanGrid;
+        private Game _game;
         private readonly int x;
         private readonly int y;
         private readonly bool isPlayerCell;
 
-        public GridCellViewModel(OceanGrid oceanGrid, bool isPlayerCell, int x, int y)
+        public GridCellViewModel(OceanGrid oceanGrid, Game game, bool isPlayerCell, int x, int y)
         {
             _oceanGrid = oceanGrid;
             this.isPlayerCell = isPlayerCell;
             this.x = x;
             this.y = y;
+            _game = game;
         }
 
         public char Symbol
@@ -44,7 +45,8 @@ namespace BattleshipGame.ViewModels
 
         public void TargetClicked()
         {
-            MessageBox.Show("Yay");
+            _game.SelectCell(x, y, isPlayerCell);
+            OnPropertyChanged(nameof(Symbol));
         }
 
         private ICommand? _targetClickedCommand;

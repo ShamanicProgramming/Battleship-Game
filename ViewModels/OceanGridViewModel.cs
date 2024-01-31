@@ -6,12 +6,14 @@ namespace BattleshipGame.ViewModels
     {
 
         private OceanGrid _oceanGrid;
+        private Game _game;
         public bool IsPlayerGrid;
 
-        public OceanGridViewModel(OceanGrid grid, bool isPlayerGrid)
+        public OceanGridViewModel(OceanGrid grid, Game game, bool isPlayerGrid)
         {
             IsPlayerGrid = isPlayerGrid;
             _oceanGrid = grid;
+            _game = game;
         }
 
         private List<List<GridCellViewModel>>? _oceanGridCells;
@@ -31,7 +33,7 @@ namespace BattleshipGame.ViewModels
                 result.Add(new List<GridCellViewModel>());
                 for (int y = 0; y < 10; y++)
                 {
-                    result[x].Add(new GridCellViewModel(_oceanGrid, IsPlayerGrid, x, y));
+                    result[x].Add(new GridCellViewModel(_oceanGrid, _game, IsPlayerGrid, x, y));
                 }
             }
 

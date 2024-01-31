@@ -17,7 +17,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                return _playerGridViewModel ?? (_playerGridViewModel = new OceanGridViewModel(Game.PlayerGrid, true));
+                return _playerGridViewModel ?? (_playerGridViewModel = new OceanGridViewModel(Game.PlayerGrid, Game, true));
             }
         }
         private OceanGridViewModel? _aiGridViewModel;
@@ -25,7 +25,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                return _aiGridViewModel ?? (_aiGridViewModel = new OceanGridViewModel(Game.AiGrid, false));
+                return _aiGridViewModel ?? (_aiGridViewModel = new OceanGridViewModel(Game.AiGrid, Game, false));
             }
         }
 
