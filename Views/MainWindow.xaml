@@ -12,20 +12,11 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate x:Key="DataTemplate_Level2">
-            <Button Content="{Binding}" Height="50" Width="50"/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="DataTemplate_Level1">
-            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </DataTemplate>
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/DataTemplateDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
     <StackPanel
@@ -64,7 +55,7 @@
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="I"/>
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="J"/>
                     </StackPanel>
-                    <ItemsControl x:Name="PlayerGrid" ItemTemplate="{DynamicResource DataTemplate_Level1}" Height="500" Width="500" ItemsSource="{Binding AiGrid}"/>
+                    <ItemsControl x:Name="PlayerGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding AiGrid}"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right">
@@ -96,7 +87,7 @@
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="I"/>
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="J"/>
                     </StackPanel>
-                    <ItemsControl x:Name="AiGrid" ItemTemplate="{DynamicResource DataTemplate_Level1}" Height="500" Width="500" ItemsSource="{Binding PlayerGrid}"/>
+                    <ItemsControl x:Name="AiGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding PlayerGrid}"/>
                 </DockPanel>
             </StackPanel>
         </DockPanel>
