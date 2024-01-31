@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BattleshipGame"
         xmlns:viewModels="clr-namespace:BattleshipGame.ViewModels"
         mc:Ignorable="d"
         Title="Battleship" Height="auto" Width="auto" SizeToContent="WidthAndHeight">
@@ -55,7 +54,7 @@
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="I"/>
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="J"/>
                     </StackPanel>
-                    <ItemsControl x:Name="PlayerGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding AiGrid}"/>
+                    <ItemsControl x:Name="PlayerGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding PlayerGridViewModel.OceanGridCells}"/>
                 </DockPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right">
@@ -87,7 +86,7 @@
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="I"/>
                         <Label Height="50" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" Content="J"/>
                     </StackPanel>
-                    <ItemsControl x:Name="AiGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding PlayerGrid}"/>
+                    <ItemsControl x:Name="AiGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding AiGridViewModel.OceanGridCells}"/>
                 </DockPanel>
             </StackPanel>
         </DockPanel>

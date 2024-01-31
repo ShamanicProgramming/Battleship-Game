@@ -4,11 +4,34 @@ namespace BattleshipGame.ViewModels
 {
     class MainWindowViewModel : ViewModelBase
     {
-        private Game Game;
+        private Game? _game;
+        public Game Game
+        {
+            get
+            {
+                return _game ?? (_game = new Game());
+            }
+        }
+        private OceanGridViewModel? _playerGridViewModel;
+        public OceanGridViewModel PlayerGridViewModel
+        {
+            get
+            {
+                return _playerGridViewModel ?? (_playerGridViewModel = new OceanGridViewModel(Game.PlayerGrid, true));
+            }
+        }
+        private OceanGridViewModel? _aiGridViewModel;
+        public OceanGridViewModel AiGridViewModel
+        {
+            get
+            {
+                return _aiGridViewModel ?? (_aiGridViewModel = new OceanGridViewModel(Game.AiGrid, false));
+            }
+        }
 
         public MainWindowViewModel()
         {
-            Game = new Game();
+
         }
 
         private ICommand? _newGameCommand;
@@ -33,66 +56,5 @@ namespace BattleshipGame.ViewModels
         {
 
         }
-
-        public List<List<char>> AiGrid
-        {
-            get
-            {
-                List<List<char>> result = new List<List<char>>();
-                for (int x = 0; x < 10; x++)
-                {
-                    result.Add(new List<char>());
-                    for (int y = 0; y < 10; y++)
-                    {
-                        if (Game.IsAiShipAt(x, y) && Game.IsAiHitAt(x, y))
-                        {
-                            result[x].Add('X');
-                        }
-                        else if (Game.IsAiHitAt(x, y))
-                        {
-                            result[x].Add('O');
-                        }
-                        else
-                        {
-                            result[x].Add(' ');
-                        }
-                    }
-                };
-                return result;
-            }
-        }
-
-        public List<List<char>> PlayerGrid
-        {
-            get
-            {
-                List<List<char>> result = new List<List<char>>();
-                for (int x = 0; x < 10; x++)
-                {
-                    result.Add(new List<char>());
-                    for (int y = 0; y < 10; y++)
-                    {
-                        if (Game.IsPlayerShipAt(x, y) && Game.IsPlayerHitAt(x, y))
-                        {
-                            result[x].Add('X');
-                        }
-                        else if (Game.IsPlayerHitAt(x, y))
-                        {
-                            result[x].Add('O');
-                        }
-                        else if (Game.IsPlayerShipAt(x, y))
-                        {
-                            result[x].Add('█');
-                        }
-                        else
-                        {
-                            result[x].Add(' ');
-                        }
-                    }
-                };
-                return result;
-            }
-        }
-
     }
 }

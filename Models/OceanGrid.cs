@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Controls;
 
 namespace BattleshipGame.Models
 {
@@ -57,6 +53,16 @@ namespace BattleshipGame.Models
         {
             Hits = new bool[10, 10];
             Ships = new ShipTypeEnum[10, 10];
+        }
+
+        public bool IsShipAt(int x, int y)
+        {
+            return Ships[x, y] != ShipTypeEnum.None;
+        }
+
+        public bool IsHitAt(int x, int y)
+        {
+            return Hits[x, y];
         }
     }
 }
