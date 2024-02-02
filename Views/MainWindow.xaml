@@ -6,10 +6,6 @@
         xmlns:viewModels="clr-namespace:BattleshipGame.ViewModels"
         mc:Ignorable="d"
         Title="Battleship" Height="auto" Width="auto" SizeToContent="WidthAndHeight">
-    <Window.DataContext>
-        <viewModels:MainWindowViewModel/>
-    </Window.DataContext>
-
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -91,10 +87,13 @@
             </StackPanel>
         </DockPanel>
         <TextBox
+            Name="MessageLog"
             IsReadOnly="True"
             Margin="10, 5"
             Height="175"
-            ></TextBox>
+            VerticalScrollBarVisibility="Visible"
+            IsReadOnlyCaretVisible="True"
+            />
         <Button
             Margin="10, 5"
             Width="100"

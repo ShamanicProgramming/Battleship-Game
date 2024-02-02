@@ -7,17 +7,19 @@ namespace BattleshipGame.ViewModels
     {
         private OceanGrid _oceanGrid;
         private Game _game;
+        private MessageHandler _messageHandler;
         private readonly int x;
         private readonly int y;
         private readonly bool isPlayerCell;
 
-        public GridCellViewModel(OceanGrid oceanGrid, Game game, bool isPlayerCell, int x, int y)
+        public GridCellViewModel(OceanGrid oceanGrid, Game game, bool isPlayerCell, int x, int y, MessageHandler messageHandler)
         {
             _oceanGrid = oceanGrid;
             this.isPlayerCell = isPlayerCell;
             this.x = x;
             this.y = y;
             _game = game;
+            _messageHandler = messageHandler;
         }
 
         public char Symbol

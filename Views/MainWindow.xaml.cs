@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using BattleshipGame.ViewModels;
+using System.Windows;
 
 namespace BattleshipGame
 {
@@ -12,6 +12,7 @@ namespace BattleshipGame
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel((message) => { MessageLog.AppendText(message); MessageLog.ScrollToEnd(); });
         }
 
     }
