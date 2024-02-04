@@ -1,6 +1,6 @@
 ﻿namespace BattleshipGame.ViewModels
 {
-    class MessageHandler : ViewModelBase
+    class MessageHandler
     {
         private Action<string> messageAction;
 

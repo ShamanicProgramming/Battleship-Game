@@ -7,15 +7,15 @@ namespace BattleshipGame.ViewModels
 
         private OceanGrid _oceanGrid;
         private Game _game;
-        private MessageHandler _messageHandler;
         public bool IsPlayerGrid;
+        private Action refreshAllSymbols;
 
-        public OceanGridViewModel(OceanGrid grid, Game game, bool isPlayerGrid, MessageHandler messageHandler)
+        public OceanGridViewModel(OceanGrid grid, Game game, bool isPlayerGrid, Action refreshAllSymbols)
         {
             IsPlayerGrid = isPlayerGrid;
             _oceanGrid = grid;
             _game = game;
-            _messageHandler = messageHandler;
+            this.refreshAllSymbols = refreshAllSymbols;
         }
 
         private List<List<GridCellViewModel>>? _oceanGridCells;
@@ -35,12 +35,22 @@ namespace BattleshipGame.ViewModels
                 result.Add(new List<GridCellViewModel>());
                 for (int y = 0; y < 10; y++)
                 {
-                    result[x].Add(new GridCellViewModel(_oceanGrid, _game, IsPlayerGrid, x, y, _messageHandler));
+                    result[x].Add(new GridCellViewModel(_oceanGrid, _game, IsPlayerGrid, x, y, refreshAllSymbols));
                 }
             }
 
             return result;
         }
 
+        internal void RefreshAllSymbols()
+        {
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < 10; y++)
+                {
+                    OceanGridCells[x][y].RefreshSymbol();
+                }
+            }
+        }
     }
 }

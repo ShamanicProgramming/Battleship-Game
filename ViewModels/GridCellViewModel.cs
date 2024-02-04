@@ -7,19 +7,19 @@ namespace BattleshipGame.ViewModels
     {
         private OceanGrid _oceanGrid;
         private Game _game;
-        private MessageHandler _messageHandler;
         private readonly int x;
         private readonly int y;
         private readonly bool isPlayerCell;
+        private Action refreshAllSymbols;
 
-        public GridCellViewModel(OceanGrid oceanGrid, Game game, bool isPlayerCell, int x, int y, MessageHandler messageHandler)
+        public GridCellViewModel(OceanGrid oceanGrid, Game game, bool isPlayerCell, int x, int y, Action refreshAllSymbols)
         {
             _oceanGrid = oceanGrid;
             this.isPlayerCell = isPlayerCell;
             this.x = x;
             this.y = y;
             _game = game;
-            _messageHandler = messageHandler;
+            this.refreshAllSymbols = refreshAllSymbols;
         }
 
         public char Symbol
@@ -47,7 +47,12 @@ namespace BattleshipGame.ViewModels
 
         public void TargetClicked()
         {
-            _game.SelectCell(x, y, isPlayerCell);
+            _game.PlayerAction(x, y, isPlayerCell);
+            refreshAllSymbols.Invoke();
+        }
+
+        internal void RefreshSymbol()
+        {
             OnPropertyChanged(nameof(Symbol));
         }
 
