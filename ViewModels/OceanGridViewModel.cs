@@ -1,4 +1,5 @@
-﻿using BattleshipGame.Models;
+﻿using BattleshipGame.Enums;
+using BattleshipGame.Models;
 
 namespace BattleshipGame.ViewModels
 {
@@ -16,6 +17,81 @@ namespace BattleshipGame.ViewModels
             _oceanGrid = grid;
             _game = game;
             this.refreshAllSymbols = refreshAllSymbols;
+        }
+
+        public string CarrierStatusText
+        {
+            get
+            {
+                if (_oceanGrid.ShipSunk(ShipTypeEnum.Carrier))
+                {
+                    return "Carrier - Sunk";
+                }
+                else
+                {
+                    return "Carrier - OK";
+                }
+            }
+        }
+
+        public string BattleshipStatusText
+        {
+            get
+            {
+                if(_oceanGrid.ShipSunk(ShipTypeEnum.Battleship))
+                {
+                    return "Battleship - Sunk";
+                }
+                else
+                {
+                    return "Battleship - OK";
+                }
+            }
+        }
+
+        public string SubmarineStatusText
+        {
+            get
+            {
+                if (_oceanGrid.ShipSunk(ShipTypeEnum.Submarine))
+                {
+                    return "Submarine - Sunk";
+                }
+                else
+                {
+                    return "Submarine - OK";
+                }
+            }
+        }
+
+        public string CruiserStatusText
+        {
+            get
+            {
+                if (_oceanGrid.ShipSunk(ShipTypeEnum.Cruiser))
+                {
+                    return "Cruiser - Sunk";
+                }
+                else
+                {
+                    return "Cruiser - OK";
+                }
+            }
+        }
+
+        public string DestroyerStatusText
+        {
+            get
+            {
+                if (_oceanGrid.ShipSunk(ShipTypeEnum.Destroyer))
+                {
+                    return "Destroyer - Sunk";
+                }
+                else
+                {
+                    return "Destroyer - OK";
+                }
+            }
         }
 
         private List<List<GridCellViewModel>>? _oceanGridCells;
@@ -51,6 +127,11 @@ namespace BattleshipGame.ViewModels
                     OceanGridCells[x][y].RefreshSymbol();
                 }
             }
+            OnPropertyChanged(nameof(CarrierStatusText));
+            OnPropertyChanged(nameof(BattleshipStatusText));
+            OnPropertyChanged(nameof(CruiserStatusText));
+            OnPropertyChanged(nameof(SubmarineStatusText));
+            OnPropertyChanged(nameof(DestroyerStatusText));
         }
     }
 }

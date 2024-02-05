@@ -29,6 +29,7 @@ namespace BattleshipGame.Models
         public void CoordsForNextShipPlacement(ShipTypeEnum shipType, out int x1, out int y1, out int x2, out int y2)
         {
             int len = ShipTypeToLengthConverter.GetLengthFromShipType(shipType);
+            int cellOffset = len - 1; // The cell offset for checking valid length is one less than the actual length of the ship
             int x;
             int y;
             do
@@ -37,36 +38,36 @@ namespace BattleshipGame.Models
                 y = _random.Next(0, 10);
             } while (_aiGrid.IsShipAt(x, y));
 
-            if(_aiGrid.AreCoordsValidShipPlacement(shipType, x, x + len, y, y))
+            if(_aiGrid.AreCoordsValidShipPlacement(shipType, x, x + cellOffset, y, y))
             {
                 x1 = x;
                 y1 = y;
-                x2 = x + len;
+                x2 = x + cellOffset;
                 y2 = y;
                 return;
             }
-            else if(_aiGrid.AreCoordsValidShipPlacement(shipType, x, x - len, y, y))
+            else if(_aiGrid.AreCoordsValidShipPlacement(shipType, x, x - cellOffset, y, y))
             {
                 x1 = x;
                 y1 = y;
-                x2 = x - len;
+                x2 = x - cellOffset;
                 y2 = y;
                 return;
             }
-            else if (_aiGrid.AreCoordsValidShipPlacement(shipType, x, x, y, y + len))
+            else if (_aiGrid.AreCoordsValidShipPlacement(shipType, x, x, y, y + cellOffset))
             {
                 x1 = x;
                 y1 = y;
                 x2 = x;
-                y2 = y + len;
+                y2 = y + cellOffset;
                 return;
             }
-            else if (_aiGrid.AreCoordsValidShipPlacement(shipType,x, x, y, y - len))
+            else if (_aiGrid.AreCoordsValidShipPlacement(shipType,x, x, y, y - cellOffset))
             {
                 x1 = x;
                 y1 = y;
                 x2 = x;
-                y2 = y - len;
+                y2 = y - cellOffset;
                 return;
             }
 

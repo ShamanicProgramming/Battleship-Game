@@ -52,6 +52,13 @@
                     </StackPanel>
                     <ItemsControl x:Name="PlayerGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding PlayerGridViewModel.OceanGridCells}"/>
                 </DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding PlayerGridViewModel}">
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding CarrierStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding BattleshipStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding CruiserStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding SubmarineStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding DestroyerStatusText}"/>
+                </StackPanel>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right">
                 <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold">Ai</TextBlock>
@@ -84,6 +91,13 @@
                     </StackPanel>
                     <ItemsControl x:Name="AiGrid" ItemTemplate="{DynamicResource ButtonGrid2D_Level1}" Height="500" Width="500" ItemsSource="{Binding AiGridViewModel.OceanGridCells}"/>
                 </DockPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DataContext="{Binding AiGridViewModel}">
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding CarrierStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding BattleshipStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding CruiserStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding SubmarineStatusText}"/>
+                    <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" Content="{Binding DestroyerStatusText}"/>
+                </StackPanel>
             </StackPanel>
         </DockPanel>
         <TextBox

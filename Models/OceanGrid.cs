@@ -20,7 +20,7 @@ namespace BattleshipGame.Models
         /// </summary>
         public bool AreCoordsValidShipPlacement(ShipTypeEnum shipType, int x1, int x2, int y1, int y2)
         {
-            if(x1 > 10 || x2 > 10 || y1 > 10 || y2 > 10) return false;
+            if(x1 > 9 || x2 > 9 || y1 > 9 || y2 > 9) return false;
             if(x1 < 0 || x2 < 0 || y1 < 0 || y2 < 0) return false;
 
             List<int> xRange = UtilStaticMethods.GetNumbersInRange(x1, x2);
@@ -29,7 +29,7 @@ namespace BattleshipGame.Models
             // the range we use is dependant on whether we are placing horizontally or vertically
             if (x1 == x2)
             {
-                if(ShipTypeToLengthConverter.GetLengthFromShipType(shipType) > yRange.Count)
+                if(ShipTypeToLengthConverter.GetLengthFromShipType(shipType) != yRange.Count)
                 {
                     return false;
                 }
@@ -43,7 +43,7 @@ namespace BattleshipGame.Models
             }
             else if (y1 == y2)
             {
-                if (ShipTypeToLengthConverter.GetLengthFromShipType(shipType) > xRange.Count)
+                if (ShipTypeToLengthConverter.GetLengthFromShipType(shipType) != xRange.Count)
                 {
                     return false;
                 }
@@ -86,6 +86,9 @@ namespace BattleshipGame.Models
             
         }
 
+        /// <summary>
+        /// Records an attempted strike on the grid. Might not necessarily score.
+        /// </summary>
         public void RecordHit(int x, int y)
         {
             Hits[x, y] = true;
@@ -108,6 +111,21 @@ namespace BattleshipGame.Models
         public bool IsHitAt(int x, int y)
         {
             return Hits[x, y];
+        }
+
+        internal bool ShipSunk(ShipTypeEnum shipType)
+        {
+            for (int x = 0; x < 10; x++)
+            {
+                for (int y = 0; y < 10; y++)
+                {
+                    if(Ships[x, y] == shipType && !Hits[x, y])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
