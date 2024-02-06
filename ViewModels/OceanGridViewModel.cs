@@ -23,7 +23,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSunk(ShipTypeEnum.Carrier))
+                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Carrier])
                 {
                     return "Carrier - Sunk";
                 }
@@ -38,7 +38,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if(_oceanGrid.ShipSunk(ShipTypeEnum.Battleship))
+                if(_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Battleship])
                 {
                     return "Battleship - Sunk";
                 }
@@ -53,7 +53,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSunk(ShipTypeEnum.Submarine))
+                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Submarine])
                 {
                     return "Submarine - Sunk";
                 }
@@ -68,7 +68,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSunk(ShipTypeEnum.Cruiser))
+                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Cruiser])
                 {
                     return "Cruiser - Sunk";
                 }
@@ -83,7 +83,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSunk(ShipTypeEnum.Destroyer))
+                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Destroyer])
                 {
                     return "Destroyer - Sunk";
                 }

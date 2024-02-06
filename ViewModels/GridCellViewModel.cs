@@ -61,16 +61,15 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                return _targetClickedCommand ?? (_targetClickedCommand = new CommandHandler(TargetClicked, () => CanExecute));
+                return _targetClickedCommand ?? (_targetClickedCommand = new CommandHandler(TargetClicked, () => CanExecuteGridCellButton));
             }
         }
 
-        public bool CanExecute
+        public bool CanExecuteGridCellButton
         {
             get
             {
-                // check if executing is allowed, i.e., validate, check if a process is running, etc. 
-                return true;
+                return !_game.GameFinished;
             }
         }
     }

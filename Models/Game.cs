@@ -1,7 +1,7 @@
 ﻿using BattleshipGame.Converters;
 using BattleshipGame.Enums;
 using BattleshipGame.Models;
-using BattleshipGame.ViewModels;
+using BattleshipGame.Util;
 
 namespace BattleshipGame
 {
@@ -13,15 +13,17 @@ namespace BattleshipGame
         private ShipTypeEnum shipToPlace;
         private Ai ai;
         private MessageHandler messageHandler;
+        public bool GameFinished { get; private set; }
 
         public Game(MessageHandler messageHandler)
         {
             this.messageHandler = messageHandler;
             shipToPlace = ShipTypeEnum.Carrier;
-            PlayerGrid = new OceanGrid();
-            AiGrid = new OceanGrid();
+            PlayerGrid = new OceanGrid(messageHandler);
+            AiGrid = new OceanGrid(messageHandler);
             shipPlacingPhase = true;
             ai = new Ai(AiGrid, PlayerGrid);
+            GameFinished = false;
         }
 
         private int previousX;
@@ -85,6 +87,12 @@ namespace BattleshipGame
                 if(AiGrid.IsShipAt(x, y))
                 {
                     messageHandler.PushMessage("It's a hit!");
+                    if(AiGrid.CheckAllShipsForSinking())
+                    {
+                        GameFinished = true;
+                        messageHandler.PushMessage("Game over. Player has won!");
+                        return;
+                    }
                 }
                 AiTurn();
             }
@@ -109,9 +117,14 @@ namespace BattleshipGame
                 ai.GetNextMove(out int x, out int y);
                 messageHandler.PushMessage("Ai fired at " + GridXToLetterConverter.GridXToLetter(x) + (y + 1) + ".");
                 PlayerGrid.RecordHit(x, y);
-                if (AiGrid.IsShipAt(x, y))
+                if (PlayerGrid.IsShipAt(x, y))
                 {
                     messageHandler.PushMessage("It's a hit!");
+                    if(PlayerGrid.CheckAllShipsForSinking())
+                    {
+                        GameFinished = true;
+                        messageHandler.PushMessage("Game over. Ai has won!");
+                    }
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿namespace BattleshipGame.ViewModels
+﻿namespace BattleshipGame.Util
 {
     class MessageHandler
     {

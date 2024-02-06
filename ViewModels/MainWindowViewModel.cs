@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using BattleshipGame.Util;
+using System.Windows.Input;
 
 namespace BattleshipGame.ViewModels
 {
