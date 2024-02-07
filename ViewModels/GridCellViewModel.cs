@@ -56,6 +56,12 @@ namespace BattleshipGame.ViewModels
             OnPropertyChanged(nameof(Symbol));
         }
 
+        internal void NewGame(OceanGrid oceanGrid, Game game)
+        {
+            _oceanGrid = oceanGrid;
+            _game = game;
+        }
+
         private ICommand? _targetClickedCommand;
         public ICommand TargetClickedCommand
         {

@@ -100,17 +100,22 @@
                 </StackPanel>
             </StackPanel>
         </DockPanel>
-        <TextBox
+        <DockPanel >
+            <TextBox
             Name="MessageLog"
             IsReadOnly="True"
             Margin="10, 5"
             Height="175"
+            Width="500"
             VerticalScrollBarVisibility="Visible"
             IsReadOnlyCaretVisible="True"
             />
-        <Button
+            <Grid
+                Margin="20, 20">
+            <Button
             Margin="10, 5"
-            Width="100"
             Command="{Binding NewGameCommand}">New Game</Button>
+            </Grid>
+        </DockPanel>
     </StackPanel>
 </Window>

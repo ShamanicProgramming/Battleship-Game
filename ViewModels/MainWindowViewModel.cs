@@ -5,7 +5,7 @@ namespace BattleshipGame.ViewModels
 {
     class MainWindowViewModel : ViewModelBase
     {
-        public Game Game { get; }
+        public Game Game { get; private set; }
 
         private OceanGridViewModel? _playerGridViewModel;
         public OceanGridViewModel PlayerGridViewModel
@@ -27,9 +27,9 @@ namespace BattleshipGame.ViewModels
 
         public MessageHandler MessageHandler;
 
-        public MainWindowViewModel(Action<string> uiMessageAction)
+        public MainWindowViewModel(Action<string> uiMessageAction, Action uiClearMessagesAction)
         {
-            MessageHandler = new MessageHandler(uiMessageAction);
+            MessageHandler = new MessageHandler(uiMessageAction, uiClearMessagesAction);
             Game = new Game(MessageHandler);
             MessageHandler.PushMessage("Welcome to battleship.");
             MessageHandler.PushMessage("Please place your ships. Select the start and end holes.");
@@ -62,7 +62,16 @@ namespace BattleshipGame.ViewModels
 
         public void NewGame()
         {
+            MessageHandler.ClearMessages();
+            MessageHandler.PushMessage("Welcome to battleship.");
+            MessageHandler.PushMessage("Please place your ships. Select the start and end holes.");
+            MessageHandler.PushMessage("Placing Carrier (5 holes).");
 
+            Game = new Game(MessageHandler);
+            AiGridViewModel.NewGame(Game.AiGrid, Game);
+            PlayerGridViewModel.NewGame(Game.PlayerGrid, Game);
+
+            RefreshAllSymbols();
         }
     }
 }

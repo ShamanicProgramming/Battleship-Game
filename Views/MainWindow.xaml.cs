@@ -12,7 +12,7 @@ namespace BattleshipGame
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel((message) => { MessageLog.AppendText(message); MessageLog.ScrollToEnd(); });
+            DataContext = new MainWindowViewModel((message) => { MessageLog.AppendText(message); MessageLog.ScrollToEnd(); }, MessageLog.Clear);
         }
 
     }

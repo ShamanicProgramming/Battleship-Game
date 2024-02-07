@@ -129,5 +129,9 @@ namespace BattleshipGame
             }
         }
 
+        internal void NewGame()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
