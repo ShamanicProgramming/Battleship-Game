@@ -1,29 +1,28 @@
 ﻿using BattleshipGame.Converters;
 using BattleshipGame.Enums;
-using BattleshipGame.Util;
 
 namespace BattleshipGame.Models
 {
     internal class Ai
     {
-        private OceanGrid _aiGrid;
-        private OceanGrid _playerGrid;
-        private Random _random;
+        private OceanGrid aiGrid;
+        private OceanGrid playerGrid;
+        private Random random;
 
         public Ai(OceanGrid aiGrid, OceanGrid playerGrid)
         {
-            _random = new Random();
-            _aiGrid = aiGrid;
-            _playerGrid = playerGrid;
+            random = new Random();
+            this.aiGrid = aiGrid;
+            this.playerGrid = playerGrid;
         }
 
         public void GetNextMove(out int x, out int y)
         {
             do
             {
-                x = _random.Next(0, 10);
-                y = _random.Next(0, 10);
-            } while (_playerGrid.IsHitAt(x, y));
+                x = random.Next(0, 10);
+                y = random.Next(0, 10);
+            } while (playerGrid.IsHitAt(x, y));
         }
 
         public void CoordsForNextShipPlacement(ShipTypeEnum shipType, out int x1, out int y1, out int x2, out int y2)
@@ -34,13 +33,13 @@ namespace BattleshipGame.Models
             int y;
             do
             {
-                x = _random.Next(0, 10);
-                y = _random.Next(0, 10);
-            } while (_aiGrid.IsShipAt(x, y));
+                x = random.Next(0, 10);
+                y = random.Next(0, 10);
+            } while (aiGrid.IsShipAt(x, y));
 
             // Randomly select a direction, if it is valid
-            int dir = _random.Next(0, 4);
-            if(_aiGrid.AreCoordsValidShipPlacement(shipType, x, x + cellOffset, y, y) && dir == 0)
+            int dir = random.Next(0, 4);
+            if(aiGrid.AreCoordsValidShipPlacement(shipType, x, x + cellOffset, y, y) && dir == 0)
             {
                 x1 = x;
                 y1 = y;
@@ -48,7 +47,7 @@ namespace BattleshipGame.Models
                 y2 = y;
                 return;
             }
-            else if(_aiGrid.AreCoordsValidShipPlacement(shipType, x, x - cellOffset, y, y) && dir == 1)
+            else if(aiGrid.AreCoordsValidShipPlacement(shipType, x, x - cellOffset, y, y) && dir == 1)
             {
                 x1 = x;
                 y1 = y;
@@ -56,7 +55,7 @@ namespace BattleshipGame.Models
                 y2 = y;
                 return;
             }
-            else if (_aiGrid.AreCoordsValidShipPlacement(shipType, x, x, y, y + cellOffset) && dir == 2)
+            else if (aiGrid.AreCoordsValidShipPlacement(shipType, x, x, y, y + cellOffset) && dir == 2)
             {
                 x1 = x;
                 y1 = y;
@@ -64,7 +63,7 @@ namespace BattleshipGame.Models
                 y2 = y + cellOffset;
                 return;
             }
-            else if (_aiGrid.AreCoordsValidShipPlacement(shipType,x, x, y, y - cellOffset) && dir == 3)
+            else if (aiGrid.AreCoordsValidShipPlacement(shipType,x, x, y, y - cellOffset) && dir == 3)
             {
                 x1 = x;
                 y1 = y;

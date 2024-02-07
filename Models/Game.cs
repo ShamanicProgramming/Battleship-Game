@@ -9,11 +9,12 @@ namespace BattleshipGame
     {
         public OceanGrid PlayerGrid { get; private set; }
         public OceanGrid AiGrid { get; private set; }
+        public bool GameFinished { get; private set; }
+
         private bool shipPlacingPhase;
         private ShipTypeEnum shipToPlace;
         private Ai ai;
         private MessageHandler messageHandler;
-        public bool GameFinished { get; private set; }
 
         public Game(MessageHandler messageHandler)
         {

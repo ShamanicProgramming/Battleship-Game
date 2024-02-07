@@ -9,6 +9,7 @@ namespace BattleshipGame.Models
         public bool[,] Hits;
         public ShipTypeEnum[,] Ships;
         public Dictionary<ShipTypeEnum, bool> ShipSinkingRecord { get; private set; }
+
         private MessageHandler messageHandler;
 
         public OceanGrid(MessageHandler messageHandler)

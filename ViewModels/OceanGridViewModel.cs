@@ -5,17 +5,16 @@ namespace BattleshipGame.ViewModels
 {
     class OceanGridViewModel : ViewModelBase
     {
-
-        private OceanGrid _oceanGrid;
-        private Game _game;
-        public bool IsPlayerGrid;
+        private bool isPlayerGrid;
+        private OceanGrid oceanGrid;
+        private Game game;
         private Action refreshAllSymbols;
 
         public OceanGridViewModel(OceanGrid grid, Game game, bool isPlayerGrid, Action refreshAllSymbols)
         {
-            IsPlayerGrid = isPlayerGrid;
-            _oceanGrid = grid;
-            _game = game;
+            this.isPlayerGrid = isPlayerGrid;
+            oceanGrid = grid;
+            this.game = game;
             this.refreshAllSymbols = refreshAllSymbols;
         }
 
@@ -23,7 +22,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Carrier])
+                if (oceanGrid.ShipSinkingRecord[ShipTypeEnum.Carrier])
                 {
                     return "Carrier - Sunk";
                 }
@@ -38,7 +37,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if(_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Battleship])
+                if(oceanGrid.ShipSinkingRecord[ShipTypeEnum.Battleship])
                 {
                     return "Battleship - Sunk";
                 }
@@ -53,7 +52,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Submarine])
+                if (oceanGrid.ShipSinkingRecord[ShipTypeEnum.Submarine])
                 {
                     return "Submarine - Sunk";
                 }
@@ -68,7 +67,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Cruiser])
+                if (oceanGrid.ShipSinkingRecord[ShipTypeEnum.Cruiser])
                 {
                     return "Cruiser - Sunk";
                 }
@@ -83,7 +82,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.ShipSinkingRecord[ShipTypeEnum.Destroyer])
+                if (oceanGrid.ShipSinkingRecord[ShipTypeEnum.Destroyer])
                 {
                     return "Destroyer - Sunk";
                 }
@@ -111,7 +110,7 @@ namespace BattleshipGame.ViewModels
                 result.Add(new List<GridCellViewModel>());
                 for (int y = 0; y < 10; y++)
                 {
-                    result[x].Add(new GridCellViewModel(_oceanGrid, _game, IsPlayerGrid, x, y, refreshAllSymbols));
+                    result[x].Add(new GridCellViewModel(oceanGrid, game, isPlayerGrid, x, y, refreshAllSymbols));
                 }
             }
 
@@ -136,8 +135,8 @@ namespace BattleshipGame.ViewModels
 
         internal void NewGame(OceanGrid oceanGrid, Game game)
         {
-            _oceanGrid = oceanGrid;
-            _game = game;
+            this.oceanGrid = oceanGrid;
+            this.game = game;
 
             for (int x = 0; x < 10; x++)
             {

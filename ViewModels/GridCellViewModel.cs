@@ -5,8 +5,8 @@ namespace BattleshipGame.ViewModels
 {
     class GridCellViewModel : ViewModelBase
     {
-        private OceanGrid _oceanGrid;
-        private Game _game;
+        private OceanGrid oceanGrid;
+        private Game game;
         private readonly int x;
         private readonly int y;
         private readonly bool isPlayerCell;
@@ -14,11 +14,11 @@ namespace BattleshipGame.ViewModels
 
         public GridCellViewModel(OceanGrid oceanGrid, Game game, bool isPlayerCell, int x, int y, Action refreshAllSymbols)
         {
-            _oceanGrid = oceanGrid;
+            this.oceanGrid = oceanGrid;
             this.isPlayerCell = isPlayerCell;
             this.x = x;
             this.y = y;
-            _game = game;
+            this.game = game;
             this.refreshAllSymbols = refreshAllSymbols;
         }
 
@@ -26,15 +26,15 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                if (_oceanGrid.IsShipAt(x, y) && _oceanGrid.IsHitAt(x, y))
+                if (oceanGrid.IsShipAt(x, y) && oceanGrid.IsHitAt(x, y))
                 {
                     return 'X';
                 }
-                else if (_oceanGrid.IsHitAt(x, y))
+                else if (oceanGrid.IsHitAt(x, y))
                 {
                     return 'O';
                 }
-                else if (_oceanGrid.IsShipAt(x, y) && isPlayerCell)
+                else if (oceanGrid.IsShipAt(x, y) && isPlayerCell)
                 {
                     return '█';
                 }
@@ -47,7 +47,7 @@ namespace BattleshipGame.ViewModels
 
         public void TargetClicked()
         {
-            _game.PlayerAction(x, y, isPlayerCell);
+            game.PlayerAction(x, y, isPlayerCell);
             refreshAllSymbols.Invoke();
         }
 
@@ -58,8 +58,8 @@ namespace BattleshipGame.ViewModels
 
         internal void NewGame(OceanGrid oceanGrid, Game game)
         {
-            _oceanGrid = oceanGrid;
-            _game = game;
+            this.oceanGrid = oceanGrid;
+            this.game = game;
         }
 
         private ICommand? _targetClickedCommand;
@@ -75,7 +75,7 @@ namespace BattleshipGame.ViewModels
         {
             get
             {
-                return !_game.GameFinished;
+                return !game.GameFinished;
             }
         }
     }

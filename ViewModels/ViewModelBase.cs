@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace BattleshipGame
+namespace BattleshipGame.ViewModels
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
